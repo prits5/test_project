@@ -1,0 +1,55 @@
+name: CI Workflow
+
+on:
+  pull_request:
+
+jobs:
+  flake8-lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - name: python-flake8
+        uses: julianwachholz/flake8-action@v2.0.2
+
+
+  black-format:
+    runs-on: ubuntu-latest
+    name: Black Code Format
+    steps:
+      - name: Black Check
+        uses: jpetrucciani/black-check@24.10.0
+
+
+
+  mypy-lint:
+    runs-on: ubuntu-latest
+    name: Mypy Check
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Mypy
+        uses: jashparekh/mypy-action@v2
+        with:
+          path: '.'
+          mypy_version: '0.910'
+          mypy_options: '--verbose'
+          mypy_config_file: 'mypy.ini'
+
+
+#  run-tests:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#
+#      - name: Docker Compose Setup
+#        uses: ndeloof/install-compose-action@v0.0.1
+#
+#      - name: Start up containers with docker compose
+#        run: docker-compose up -d
+#
+#      - name: Run tests
+#        run: docker-compose exec web pytest --cov=. --cov-report=term --cov-fail-under=90
+#
+#      - name: Stop containers
+#        run: docker-compose down
