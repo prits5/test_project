@@ -4,23 +4,16 @@ from datetime import datetime
 from django.db import models
 
 from contract.models import Contract
+from mixins.models import BaseModelMixin
 from product.models import Product
 
 
-class CreditApplication(models.Model):
-    id: uuid.UUID = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False
-    )
+class CreditApplication(BaseModelMixin):
     contract = models.OneToOneField(
         Contract,
         on_delete=models.CASCADE,
         related_name="credit_application",
     )
-    products = models.ManyToManyField(
-        Product,
-        related_name="credit_applications",
-    )
-    created_at: datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"Credit {self.id}"

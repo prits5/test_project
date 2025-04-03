@@ -36,6 +36,7 @@ jobs:
           mypy_config_file: 'mypy.ini'
 
 
+# TODO: uncomment when tests are implemented
 #  run-tests:
 #    runs-on: ubuntu-latest
 #    steps:

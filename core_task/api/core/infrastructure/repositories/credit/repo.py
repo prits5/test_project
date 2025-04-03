@@ -15,8 +15,9 @@ from credit_application.models import CreditApplication
 logger = logging.getLogger(__name__)
 
 
-class CreditApplicationRepository(ICreditApplicationRepository):
-    def get_by_contract_id(self, contract_id: UUID) -> CreditApplicationEntity | None:
+class CreditApplicationRepository:
+    @staticmethod
+    def get_by_contract_id(contract_id: UUID) -> CreditApplicationEntity | None:
         logger.debug(
             "Starting to fetch for contract ID: %s",
             contract_id

@@ -5,5 +5,6 @@ from api.core.domain.entities.credit_application import CreditApplicationEntity
 
 
 class ICreditApplicationRepository(Protocol):
-    def get_by_contract_id(self, contract_id: UUID) -> CreditApplicationEntity:
+    @staticmethod
+    def get_by_contract_id(contract_id: UUID) -> CreditApplicationEntity:
         pass
